@@ -5,7 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ebdc009-f35f-4bb5-9e5e-c3d6ab9d309f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/fastapi.txt" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/nixpacks.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
