@@ -1,2 +1,6 @@
 fastapi
+pydantic
+typing
+numpy
 uvicorn
+pandas
