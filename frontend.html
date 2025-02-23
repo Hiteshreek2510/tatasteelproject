@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Failure Prediction</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Machine Failure Prediction</h2>
+        <form id="predictionForm" class="mt-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="form-label">Type</label>
+                    <input type="text" class="form-control" name="Type" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Air Temperature (K)</label>
+                    <input type="number" class="form-control" name="Air_temperature_K" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Process Temperature (K)</label>
+                    <input type="number" class="form-control" name="Process_temperature_K" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Rotational Speed (RPM)</label>
+                    <input type="number" class="form-control" name="Rotational_speed_rpm" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Torque (Nm)</label>
+                    <input type="number" class="form-control" name="Torque_Nm" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Tool Wear</label>
+                    <input type="number" class="form-control" name="Tool_wear" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">TWF</label>
+                    <input type="number" class="form-control" name="TWF" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">HDF</label>
+                    <input type="number" class="form-control" name="HDF" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">PWF</label>
+                    <input type="number" class="form-control" name="PWF" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">OSF</label>
+                    <input type="number" class="form-control" name="OSF" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">RNF</label>
+                    <input type="number" class="form-control" name="RNF" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Predict</button>
+        </form>
+        <div class="mt-4" id="predictionResult"></div>
+    </div>
+
+    <script>
+        document.getElementById('predictionForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const jsonData = {};
+            formData.forEach((value, key) => {
+                jsonData[key] = isNaN(value) ? value : parseFloat(value);
+            });
+
+            try {
+                const response = await fetch("/predict", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(jsonData)
+                });
+
+                const result = await response.json();
+
+                // Display the prediction result
+                document.getElementById('predictionResult').innerHTML =
+                    `<h4>Failure Prediction: ${result.failure_prediction}</h4>`;
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
