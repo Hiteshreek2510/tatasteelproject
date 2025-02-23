@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "fastapi_ml_model_folder/server.py",
+      "src": "server.py",
       "use": "@vercel/python",
       "config": { "maxLambdaSize": "50mb" }
     }
@@ -10,7 +10,7 @@
   "routes": [
     {
       "src": "/.*",
-      "dest": "fastapi_ml_model_folder/server.py"
+      "dest": "server.py"
     }
   ]
 }
